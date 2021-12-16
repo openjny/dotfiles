@@ -1,0 +1,33 @@
+! backup
+! $ xmodmap -pke > ~/.Xmodmap_default
+!
+! check keycod
+! $ xev
+!
+! for resetting settings:
+! $ setxkbmap -option
+!
+! keycode <key-id> = <key> <shift + key> <Mode_switch + key> <Mode_switch + shift + key>
+
+! remove CapsLock
+clear lock
+remove Lock = Caps_Lock
+
+! physical CapsLock (66) to Mode_switch
+keycode 66 = Mode_switch
+
+! physical Alt_R to ESCAPE
+keysym Alt_R = Escape
+
+! vim-style cursor
+keycode 43 = h H Left Left
+keycode 44 = j J Down Down
+keycode 45 = k K Up Up
+keycode 46 = l L Right Right
+! keysym h = h h left
+! keysym l = l l right
+! keysym k = k K Up
+! keysym j = j J Down
+
+! Mode + o = Backspace
+keycode 32 = o O BackSpace BackSpace
