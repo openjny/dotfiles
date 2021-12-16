@@ -54,10 +54,6 @@ setup_symlinks() {
     title "Creating symlinks"
 
     load_homebrew
-    if ! command_exists brew; then
-        error "Homebrew doesn't exit. Run install.sh [homebrew] first."
-    fi
-
     if ! command_exists stow; then
         error "Need stow to locate symlinks"
     fi
