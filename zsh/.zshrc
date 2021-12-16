@@ -83,9 +83,6 @@ setopt COMPLETE_ALIASES
 # Setup
 ########################################################
 
-# If a local zshrc exists, source it
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
 # fzf config
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
@@ -114,3 +111,6 @@ source "$HOME/.zsh/prompt.zsh"
 source "$HOME/.zsh/alias.zsh"
 source "$HOME/.zsh/keybind.zsh"
 source "$HOME/.zsh/utils.zsh"
+
+# If a local zshrc exists, source it
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
