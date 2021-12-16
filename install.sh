@@ -169,6 +169,16 @@ setup_macos() {
     fi
 }
 
+setup_linux() {
+    title "Configuring linux"
+    if [[ "$(uname)" == "Linux" ]]; then
+        # xmodmap
+        stow -v xmodmap
+    else
+        warning "Linux not detected. Skipping."
+    fi
+}
+
 cd "$DOTFILES"
 
 case "$1" in
@@ -193,6 +203,9 @@ case "$1" in
     macos)
         setup_macos
         ;;
+    linux)
+        setup_linux
+        ;;
     all)
         setup_homebrew
         setup_symlinks
@@ -200,9 +213,10 @@ case "$1" in
         setup_shell
         setup_git
         setup_macos
+        setup_linux
         ;;
     *)
-        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"
+        echo -e $"\nUsage: $(basename "$0") {backup|symlinks|git|homebrew|shell|terminfo|macos|linux|all}\n"
         exit 1
         ;;
 esac
