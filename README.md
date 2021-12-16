@@ -2,14 +2,11 @@
 
 ## Installation
 
-Ubuntu 20.04
-
 ```bash
+# for Ubuntu/Debian
 sudo apt update
 sudo apt install -y --no-install-recommends build-essential
-```
 
-```
 git clone https://github.com/OpenJNY/dotfiles.git ~/dotfiles
 cd dotfiles
 ./install.sh all
