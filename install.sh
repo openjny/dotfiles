@@ -82,6 +82,12 @@ setup_git() {
     git config --global user.name "${name:-$defaultName}"
     git config --global user.email "${email:-$defaultEmail}"
     git config --global github.user "${github:-$defaultGithub}"
+    
+    # pull rebase strategy
+    # hint:   git config pull.rebase false  # merge (the default strategy)
+    # hint:   git config pull.rebase true   # rebase
+    # hint:   git config pull.ff only       # fast-forward only
+    git config --global pull.rebase false
 
     if [[ "$(uname)" == "Darwin" ]]; then
         git config --global credential.helper "osxkeychain"
