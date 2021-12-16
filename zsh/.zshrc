@@ -9,11 +9,14 @@ fi
 prepend_path "$HOME/$DOTFILES/bin"
 prepend_path $HOME/bin
 
-# tmux
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
-else
-    export TERM=tmux-256color
+# terminal settings
+# if [ -z "$TMUX" ]; then
+#     export TERM=xterm-256color-italic
+# else
+#     export TERM=tmux-256color
+# fi
+if tput -T xterm-256color longname >/dev/null; then
+    export TERM=xterm-256color  # xterm-256color specific configuration
 fi
 
 # completion
