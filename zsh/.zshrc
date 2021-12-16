@@ -6,7 +6,7 @@ if [[ -d ~/.zsh/functions ]]; then
 fi
 
 # extra path
-prepend_path $DOTFILES/bin
+prepend_path "$HOME/$DOTFILES/bin"
 prepend_path $HOME/bin
 
 # tmux
