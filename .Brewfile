@@ -23,24 +23,15 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 
 # packages
-brew "bat" # better cat
-brew "entr" # file watcher / command runner
-brew "fd" # find alternative
 brew "fzf" # Fuzzy file searcher, used in scripts and in vim
-brew "gh" # GitHub CLI
 brew "git" # Git version control (latest version)
 brew "grep" # grep (latest)
 brew "jq" # work with JSON files in shell scripts
-brew "neofetch" # pretty system info
 brew "neovim" # A better vim
 brew "python" # python (latst)
-brew "ripgrep" # very fast file searcher
-brew "fnm" # Fast Node version manager
-brew "shellcheck" # diagnostics for shell sripts
 brew "stow" # For symoblic file management 
 brew "tmux" # terminal multiplexer
 brew "tree" # pretty-print directory contents
-brew "vim" # Vim (latest)
 brew "wget" # internet file retriever
 brew "z" # switch between most used directories
 brew "zsh" # zsh (latest)
