@@ -2,6 +2,12 @@
 
 ## Installation
 
+Ubuntu 20.04
+
+```bash
+sudo apt update
+sudo apt install -y --no-install-recommends build-essential
+```
 
 ```
 git clone https://github.com/OpenJNY/dotfiles.git ~/dotfiles
