@@ -6,3 +6,9 @@ repo = 'joshdick/onedark.vim'
 hook_add = '''
 colorscheme onedark
 '''
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
