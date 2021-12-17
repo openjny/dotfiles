@@ -26,6 +26,9 @@ fi
 autoload -U compinit add-zsh-hook
 compinit
 
+# highlight current selection
+zstyle ':completion:*:default' menu select=2
+
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # pasting with tabs doesn't perform completion
