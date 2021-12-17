@@ -35,3 +35,4 @@ brew "tree" # pretty-print directory contents
 brew "wget" # internet file retriever
 brew "z" # switch between most used directories
 brew "zsh" # zsh (latest)
+brew "zsh-completions" # zsh-users/zsh-completions
