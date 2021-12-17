@@ -1,36 +1,47 @@
-if (!exists('*SourceConfig'))
-  function SourceConfig() abort
-    " Your path will probably be different
-    for f in split(glob('~/.config/nvim/autoload/*'), '\n')
-      exe 'source' f
-    endfor
+" ~/.config/nvim/init.vim
 
-    source $MYVIMRC
-  endfunction
-endif
-
-
-" Leader mapping
-" ==============
-" Leader to space
-let mapleader = "\<Space>"
-
-" source
-nnoremap <silent> <Leader><Leader> :source $MYVIMRC
-
-" Appearance
-" ==========
+" basic display settings
 set number
+set ruler
+syntax on
+
+" no swap files
+set noswapfile
+set nobackup
+set nowritebackup
+
+" encoding
+set encoding=utf-8
+
+" indenct
 set expandtab
 set smartindent
-set shiftwidth=2
-set softtabstop=2
-set autochdir
-set encoding=utf-8
-set hls
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set list listchars=tab:▸\ ,trail:·
+set nofixeol
 
-" Plugins
-" =======
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" file systems
+set autochdir
+
+" search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+autocmd QuickFixCmdPost *grep* cwindow
+
+" mouse scrolling
+set mouse=a
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
+" plugins
 if &compatible
   set nocompatible
 endif
@@ -44,3 +55,22 @@ if dein#load_state('~/.cache/dein')
 endif
 filetype plugin indent on
 syntax enable
+
+" autoload configs
+for f in glob('$HOME/.config/nvim/autoload/*.vim', 0, 1)
+  exe 'source' f
+endfor
+
+" local config
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+if has('win32')
+  let $MYLOCALVIMRC = $HOME . "/_local.vim"
+else
+  let $MYLOCALVIMRC = $HOME . "/.local.vim"
+endif
+call SourceIfExists($MYLOCALVIMRC)
+
