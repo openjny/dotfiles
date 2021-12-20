@@ -89,6 +89,9 @@ setup_git() {
     # hint:   git config pull.ff only       # fast-forward only
     git config --global pull.rebase false
 
+    # master -> main
+    git config --global init.defaultBranch main
+
     if [[ "$(uname)" == "Darwin" ]]; then
         git config --global credential.helper "osxkeychain"
     else
