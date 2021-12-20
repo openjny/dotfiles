@@ -27,3 +27,10 @@ export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 
 # export LANG=ja_JP.UTF-8
+
+# Android Studio
+[ -d "$HOME/Library/Android/sdk" ] && ANDROID_SDK=$HOME/Library/Android/sdk || ANDROID_SDK=$HOME/Android/Sdk
+if [ -d $ANDROID_SDK ]; then
+    export ANDROID_SDK
+    export PATH="$ANDROID_SDK/platform-tools:$PATH"
+fi

@@ -6,22 +6,56 @@ if [[ -d ~/.zsh/functions ]]; then
 fi
 
 # extra path
-prepend_path $DOTFILES/bin
+prepend_path "$HOME/$DOTFILES/bin"
 prepend_path $HOME/bin
 
-# tmux
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
-else
-    export TERM=tmux-256color
+# terminal settings
+# if [ -z "$TMUX" ]; then
+#     export TERM=xterm-256color-italic
+# else
+#     export TERM=tmux-256color
+# fi
+if tput -T xterm-256color longname >/dev/null; then
+    export TERM=xterm-256color  # xterm-256color specific configuration
 fi
 
 # completion
 # ----------
 
 # initialize autocomplete
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    ZSH_AUTOSUGGESTIONS=$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    [ -e $ZSH_AUTOSUGGESTIONS ] && source $ZSH_AUTOSUGGESTIONS
+
+    ZSH_SYNTAX_HIGHLIGHTING=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    [ -e $ZSH_SYNTAX_HIGHLIGHTING ] && source $ZSH_SYNTAX_HIGHLIGHTING
+fi
+
 autoload -U compinit add-zsh-hook
 compinit
+
+# setopt correct # correct automatically
+setopt auto_cd
+setopt auto_list
+setopt auto_menu
+setopt auto_param_keys
+setopt auto_param_slash
+setopt brace_ccl
+setopt complete_aliases
+setopt extended_glob
+setopt globdots
+setopt hist_expand
+setopt list_packed
+setopt list_types 
+setopt magic_equal_subst
+setopt mark_dirs
+setopt nolistbeep
+
+# highlight current selection
+zstyle ':completion:*:default' menu select=2
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -29,6 +63,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' insert-tab pending
 # default to file completion
 zstyle ':completion:*' completer _expand _complete _files _correct _approximate
+
+zstyle ':completion:*' list-separator '-->'
+zstyle ':completion:*:manuals' separate-sections true
 
 # dev
 # ---
@@ -45,38 +82,26 @@ fi
 autoload colors
 colors
 
-setopt auto_list                # 
-setopt auto_param_slash         # 
-setopt mark_dirs                #
-setopt list_types               # 
-setopt auto_menu                # Tab to complete menue
-setopt auto_param_keys
-setopt magic_equal_subst
-setopt extended_glob
-setopt globdots
-setopt brace_ccl
-
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 export KEYTIMEOUT=1              # 10ms delay for key sequences
 
-setopt NO_BG_NICE
-setopt NO_HUP                    # don't kill background jobs when the shell exits
-setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS
-setopt LOCAL_TRAPS
-setopt PROMPT_SUBST
+setopt no_bg_nice
+setopt no_hup                    # don't kill background jobs when the shell exits
+setopt no_list_beep
+setopt local_options
+setopt local_traps
+setopt prompt_subst
 
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt EXTENDED_HISTORY          # write the history file in the ":start:elapsed;command" format.
-setopt HIST_REDUCE_BLANKS        # remove superfluous blanks before recording entry.
-setopt SHARE_HISTORY             # share history between all sessions.
-setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a duplicate.
+setopt extended_history          # write the history file in the ":start:elapsed;command" format.
+setopt hist_reduce_blanks        # remove superfluous blanks before recording entry.
+setopt share_history             # share history between all sessions.
+setopt hist_ignore_all_dups      # delete old recorded entry if new entry is a duplicate.
 
-setopt COMPLETE_ALIASES
 
 
 ########################################################
