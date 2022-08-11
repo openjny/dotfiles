@@ -34,3 +34,7 @@ zinit light Aloxaf/fzf-tab
 # git fuzzy
 zinit ice as"program" pick"bin/git-fuzzy"
 zinit light bigH/git-fuzzy
+
+# kubectl
+zplug "plugins/kubectl", from:oh-my-zsh, defer:2
+zplug "bonnefoa/kubectl-fzf", defer:3
