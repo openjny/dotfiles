@@ -12,3 +12,6 @@ repo = 'lambdalisue/fern.vim'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
