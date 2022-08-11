@@ -1,0 +1,4 @@
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+on_event = ['BufRead']
