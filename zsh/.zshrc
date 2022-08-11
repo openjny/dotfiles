@@ -112,6 +112,9 @@ setopt hist_ignore_all_dups      # delete old recorded entry if new entry is a d
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# cheat
+export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
+
 # add color to man pages
 export MANROFFOPT='-c'
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
