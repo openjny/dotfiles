@@ -27,3 +27,6 @@ zinit light zsh-users/zsh-completions
 # Two regular plugins loaded without tracking.
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+# use fzf in completion menu
+zinit light Aloxaf/fzf-tab
