@@ -30,3 +30,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 
 # use fzf in completion menu
 zinit light Aloxaf/fzf-tab
+
+# git fuzzy
+zinit ice as"program" pick"bin/git-fuzzy"
+zinit light bigH/git-fuzzy
