@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+# sinks = Output
+# source = Inout
+# ref: https://askubuntu.com/questions/1038490/how-do-you-set-a-default-audio-output-device-in-ubuntu
+pactl set-default-sink $(pactl list short sinks | cut -f2 | fzf)
