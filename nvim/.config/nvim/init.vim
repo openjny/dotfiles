@@ -41,6 +41,9 @@ set mouse=a
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
+" clipboard
+set clipboard=unnamedplus
+
 " plugins
 if &compatible
   set nocompatible
