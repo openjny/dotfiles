@@ -21,6 +21,9 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+# 
+zinit light zsh-users/zsh-completions
+
 # Two regular plugins loaded without tracking.
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting

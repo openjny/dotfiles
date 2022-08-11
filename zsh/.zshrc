@@ -1,13 +1,11 @@
 export ZSH=$DOTFILES/zsh
 
-# functions
-if [[ -d ~/.zsh/functions ]]; then
-    for func in ~/.zsh/functions/*(:t); autoload -U $func
-fi
-
 # extra path
-prepend_path "$HOME/$DOTFILES/bin"
-prepend_path $HOME/bin
+path=(
+    "$HOME/$DOTFILES/bin"
+    "$HOME/bin"
+    $path
+)
 
 # terminal settings
 # if [ -z "$TMUX" ]; then
@@ -25,7 +23,8 @@ fi
 # initialize autocomplete
 
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    ZSH_COMPLETIONS="$(brew --prefix)/share/zsh-completions"
+    [ -e $ZSH_COMPLETIONS ] && FPATH="$ZSH_COMPLETIONS:$FPATH"
 
     ZSH_AUTOSUGGESTIONS=$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     [ -e $ZSH_AUTOSUGGESTIONS ] && source $ZSH_AUTOSUGGESTIONS
@@ -125,17 +124,19 @@ export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_mr=$(tput rev)
 export LESS_TERMCAP_mh=$(tput dim)
 
-# source z.sh if it exists
-zpath="$(brew --prefix)/etc/profile.d/z.sh"
-if [ -f "$zpath" ]; then
-    source "$zpath"
+# load functions
+if [ -d ~/.zsh/functions ]; then
+    for func in ~/.zsh/functions/*(:t); autoload -U $func
 fi
 
-source "$HOME/.zsh/plugins.zsh"
-source "$HOME/.zsh/prompt.zsh"
-source "$HOME/.zsh/alias.zsh"
-source "$HOME/.zsh/keybind.zsh"
-source "$HOME/.zsh/utils.zsh"
+# source z.sh if it exists
+zpath="$(brew --prefix)/etc/profile.d/z.sh"
+[ -f "$zpath" ] && source "$zpath"
+
+# source settings
+if [ -d $HOME/.zsh ]; then
+    for zsh_file in $HOME/.zsh/*.zsh; source "$zsh_file"
+fi
 
 # If a local zshrc exists, source it
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
