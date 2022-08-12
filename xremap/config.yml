@@ -1,0 +1,31 @@
+# https://github.com/k0kubun/xremap/issues/124
+
+modmap:
+  - name: Global
+    remap:
+      CapsLock:
+        Super_R
+        # alone: Esc
+        # held: Super_R
+      # Alt_R: Alt_L
+
+keymap:
+  - name: Ctrl + [
+    remap:
+      Super_R:
+        remap:
+          Super_R: KEY_ESC
+        timeout_millis: 150
+
+      Super_R-h: Left
+      Super_R-j: Down
+      Super_R-k: Up
+      Super_R-l: Right
+      Super_R-o: Backspace
+      Super_R-BackSpace: Delete
+
+      # Disable pre-defined commands on Super
+      Super_R-p: p
+
+      # Ctrl [ = Turn off IME + Esc
+      CTRL-KEY_LEFTBRACE: [Muhenkan, Esc]
