@@ -24,8 +24,12 @@ keymap:
       Super_R-o: Backspace
       Super_R-BackSpace: Delete
 
+      # Ctrl+Space = IME On/Off
+      Super_R-Space: CTRL-KEY_SPACE
+
       # Disable pre-defined commands on Super
       Super_R-p: p
 
       # Ctrl [ = Turn off IME + Esc
+      Super_R-KEY_LEFTBRACE: [Muhenkan, Esc]
       CTRL-KEY_LEFTBRACE: [Muhenkan, Esc]
