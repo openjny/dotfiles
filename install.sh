@@ -129,7 +129,8 @@ setup_homebrew() {
 
     # install fzf
     echo -e
-    info "Installing fzf optional feature"
+    info "Installing fzf/rg and optional features"
+    brew install fzf ripgrep
     "$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
 }
 

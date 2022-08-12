@@ -28,11 +28,8 @@ brew "git" # Git version control (latest version)
 brew "grep" # grep (latest)
 brew "jq" # work with JSON files in shell scripts
 brew "neovim" # A better vim
-brew "python" # python (latst)
 brew "stow" # For symoblic file management 
 brew "tmux" # terminal multiplexer
-brew "tree" # pretty-print directory contents
-brew "wget" # internet file retriever
 brew "z" # switch between most used directories
 brew "zsh" # zsh (latest)
 brew "zsh-completions" # zsh-users/zsh-completions
