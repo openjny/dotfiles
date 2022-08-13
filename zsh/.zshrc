@@ -126,10 +126,10 @@ setopt hist_ignore_all_dups         # delete old recorded entry if new entry is 
 
 # UP/DOWN to search history, based on the text input in command line.
 autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
+# zle -N history-beginning-search-backward-end history-search-end
+# zle -N history-beginning-search-forward-end history-search-end
+# bindkey "^[[A" history-beginning-search-backward-end
+# bindkey "^[[B" history-beginning-search-forward-end
 
 
 # -------------------------------------
