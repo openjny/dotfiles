@@ -19,9 +19,11 @@ sudo mv xremap $XREMAP
 sudo gpasswd -a $USER input
 echo 'KERNEL=="uinput", GROUP="input"' | sudo tee /etc/udev/rules.d/input.rules
 
-# config.yml
+# create config.yml
 [ -d "$XREMAP_CONFIG_DIR" ] || mkdir -p "$XREMAP_CONFIG_DIR"
-$EDITOR $XREMAP_CONFIG
+
+ln -sf ~/dotfiles/xremap/config.yml $XREMAP_CONFIG
+# vim $XREMAP_CONFIG
 
 # systemd (xremap.service)
 SYSTEMD_SERVICE_DIR="~/.config/systemd/user"
