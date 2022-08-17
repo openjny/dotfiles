@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+if [ $# -lt 1 ]; then
+    echo "Usage: encode-file <path> [<enc-path>] [<cipher>]"
+    exit 1
+fi
+
+path="$1"
+enc_path=${2:-"$path.enc"}
+cipher=${3:-"aes-256-cbc"}
+
+# read password
+read -sp "password: " PASS
+tty -s && echo
+
+openssl enc -e -$cipher -pbkdf2 -k $PASS -in $path -out $enc_path
+
+if [ $? -eq 0 ]; then
+    echo "encripted file ($cipher) created at: $enc_path"
+else
+    echo "encription failed..."
+    rm $enc_path
+    exit 1
+fi

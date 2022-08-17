@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+if [ $# -lt 1 ]; then
+    echo "Usage: decode-file <enc-path> [<dec-path>] [<cipher>]"
+    exit 1
+fi
+
+enc_path="$1"
+dec_path=${2:-"$enc_path.dec"}
+cipher=${3:-"aes-256-cbc"}
+
+# read password
+read -sp "password: " PASS
+tty -s && echo
+
+openssl enc -d -$cipher -pbkdf2 -k $PASS -in $enc_path -out $dec_path && :
+
+if [ $? -eq 0 ]; then
+    echo "decrypted file ($cipher) created at: $dec_path"
+else
+    echo "decryption failed..."
+    rm $dec_path
+    exit 1
+fi
