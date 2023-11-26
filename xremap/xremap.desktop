@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+# Exec=/usr/local/bin/xremap --watch "$HOME/.config/xremap/config.yml"
+Exec="$HOME/.cargo/bin/xremap --watch $HOME/.config/xremap/config.yml"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name[en_US]=xremap
+Name=xremap
+Comment[en_US]=
+Comment=

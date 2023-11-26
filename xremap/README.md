@@ -2,61 +2,51 @@
 
 https://github.com/k0kubun/xremap
 
-```bash
-VERSION="v0.5.0"
-XREMAP="/usr/local/bin/xremap"
-XREMAP_CONFIG_DIR="/home/$USER/.config/xremap"
-XREMAP_CONFIG="$XREMAP_CONFIG_DIR/config.yml"
+## インストール
 
-# install xremap
-cd /tmp
-wget "https://github.com/k0kubun/xremap/releases/download/$VERSION/xremap-linux-x86_64-gnome.zip"
-unzip xremap-linux-x86_64-gnome.zip
-chmod +x xremap
-sudo mv xremap $XREMAP
+```bash
+echo $XDG_CONFIG_HOME
+# x11 
+
+cargo install xremap --features x11
 
 # running xremap without sudo
 sudo gpasswd -a $USER input
 echo 'KERNEL=="uinput", GROUP="input"' | sudo tee /etc/udev/rules.d/input.rules
+```
 
-# create config.yml
-[ -d "$XREMAP_CONFIG_DIR" ] || mkdir -p "$XREMAP_CONFIG_DIR"
+## 管理
 
-ln -sf ~/dotfiles/xremap/config.yml $XREMAP_CONFIG
-# vim $XREMAP_CONFIG
+### systemd で管理
 
-# systemd (xremap.service)
-SYSTEMD_SERVICE_DIR="~/.config/systemd/user"
-[ -d "$SYSTEMD_SERVICE_DIR" ] || mkdir -p "$SYSTEMD_SERVICE_DIR"
-cat <<EOF > "$SYSTEMD_SERVICE_DIR/xremap.service"
+```bash
+XREMAP=$(which xremap)
+XREMAP=$(readlink -f $XREMAP)
+XREMAP_CONFIG="$HOME/.config/xremap/config.yml"
+
+cat <<EOF > "~/.config/systemd/user/xremap.service"
 [Unit]
 Description=xremap
 
 [Service]
 KillMode=process
-ExecStart=$XREMAP $XREMAP_CONFIG
+ExecStart=$XREMAP --watch $XREMAP_CONFIG
 ExecStop=/usr/bin/killall xremap
+Type=simple
 Restart=always
-Environment=DISPLAY=:0.0
 
 [Install]
-WantedBy=graphical.target
+WantedBy=default.target
 EOF
-sudo systemctl enable xremap
 
-# autostart program
-AUTOSTART_DIR="~/.config/autostart"
-[ -d "$AUTOSTART_DIR" ] || mkdir -p "$AUTOSTART_DIR"
-cat <<EOF > "$AUTOSTART_DIR/xremap.desktop"
-[Desktop Entry]
-Type=Application
-Exec=$XREMAP $XREMAP_CONFIG
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[en_US]=xremap
-Name=xremap
-Comment[en_US]=
-Comment=
-EOF
+systemctl --user enable xremap
+systemctl --user start xremap
 ```
+
+`--watch` を指定していることによって、キーボードの接続を検知すると自動的に新たな input デバイスにも設定が適用される (便利)。
+
+再起動したければ `systemctl --user restart xremap` で良い。`./bin/restart-xremap` にも同様の処理を記述している。
+
+### Startup Application で管理 (非推奨)
+
+[xremap.desktop](./xremap.desktop) を `~/.config/autostart/` に配置する。
