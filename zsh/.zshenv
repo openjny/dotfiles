@@ -16,6 +16,7 @@ export VIM_TMP="$HOME/.vim-tmp"
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
 
 fpath=(
+    $HOME/.zsh/completion
     $HOME/.zsh/functions
     /usr/local/share/zsh/site-functions
     $fpath
