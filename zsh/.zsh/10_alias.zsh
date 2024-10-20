@@ -51,6 +51,9 @@ alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
 
 alias nr="npm run"
 
+# my sudo with environment variables kept
+alias mysudo='sudo -E env "PATH=$PATH"'
+
 # OS-specific alias
 case $(uname) in
   Darwin)
