@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ヘルプメッセージ
+function show_help() {
+    echo "Usage:"
+    echo "  $(basename $0) [URL1] [URL2] ..." 
+    echo "     - Add URLs to the /etc/hosts file."
+    echo "  $(basename $0) -r [URL1] [URL2] ..."
+    echo "     - Remove URLs from the /etc/hosts file."
+    echo "  $(basename $0) [-h|--help]"
+    echo "     - Show this help message."
+}
+
+# ヘルプの表示条件
+if [[ $# -eq 0 ]] || [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+    show_help
+    exit 1
+fi
+
+# root権限のチェック
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root."
+    exit 1
+fi
+
+# 削除フラグの確認
+REMOVE_MODE=false
+if [[ "$1" == "-r" ]]; then
+    REMOVE_MODE=true
+    shift # -r を引数リストから除外
+fi
+
+# URLの追加・削除処理
+for site in "$@"; do
+    if $REMOVE_MODE; then
+        # 削除モードの場合
+        if grep -q "$site" /etc/hosts; then
+            echo "Removing $site..."
+            sed -i.bak "/$site/d" /etc/hosts
+        else
+            echo "$site is not blocked."
+        fi
+    else
+        # 追加モードの場合
+        if grep -q "$site" /etc/hosts; then
+            echo "$site is already blocked."
+        else
+            echo "Blocking $site..."
+            echo "127.0.0.1 $site" >> /etc/hosts
+        fi
+    fi
+done
