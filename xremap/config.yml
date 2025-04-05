@@ -24,8 +24,9 @@ keymap:
       Super_R-o: Backspace
       Super_R-BackSpace: Delete
 
-      # Ctrl+Space = IME On/Off
-      Super_R-Space: CTRL-KEY_SPACE
+      # CapsLock + Space = IME Switcher
+      # Super_R-Space: CTRL-KEY_SPACE
+      Super_R-Space: Hiragana
 
       # Disable pre-defined commands on Super
       Super_R-p: p
