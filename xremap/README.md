@@ -10,9 +10,9 @@ echo $XDG_CONFIG_HOME
 
 cargo install xremap --features x11
 
-# running xremap without sudo
+# sudo なしで実行するための設定 (最新情報は README を参照)
 sudo gpasswd -a $USER input
-echo 'KERNEL=="uinput", GROUP="input"' | sudo tee /etc/udev/rules.d/input.rules
+echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/input.rules
 ```
 
 ## 管理
