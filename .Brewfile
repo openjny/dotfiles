@@ -1,8 +1,4 @@
 if OS.mac?
-    # taps
-    tap "homebrew/cask"
-    tap "homebrew/cask-fonts"
-
     brew "noti" # utility to display notifications from scripts
     brew "trash" # rm, but put in the trash rather than completely delete
 
@@ -18,9 +14,6 @@ if OS.mac?
 elsif OS.linux?
     brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)
 end
-
-tap "homebrew/bundle"
-tap "homebrew/core"
 
 # packages
 brew "fzf" # Fuzzy file searcher, used in scripts and in vim
