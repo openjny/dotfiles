@@ -24,7 +24,7 @@ XREMAP=$(which xremap)
 XREMAP=$(readlink -f $XREMAP)
 XREMAP_CONFIG="$HOME/.config/xremap/config.yml"
 
-cat <<EOF > "~/.config/systemd/user/xremap.service"
+cat <<EOF > "$HOME/.config/systemd/user/xremap.service"
 [Unit]
 Description=xremap
 
