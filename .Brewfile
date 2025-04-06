@@ -13,6 +13,13 @@ if OS.mac?
     cask "font-3270-nerd-font"
 elsif OS.linux?
     brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)
+    
+    # Fonts
+    tap "homebrew/linux-fonts"
+
+    brew "homebrew/linux-fonts/font-m-plus-1-code", args: ["HEAD"]
+    brew "homebrew/linux-fonts/font-source-han-code-jp"
+    brew "homebrew/linux-fonts/font-ubuntu-mono-derivative-powerline", args: ["HEAD"]
 end
 
 # packages
