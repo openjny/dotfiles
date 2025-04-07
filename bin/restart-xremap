@@ -1,3 +1,20 @@
 #!/bin/bash
 
-systemctl --user restart xremap
+# check if xremap is running as a systemd user service
+if systemctl --user is-active --quiet xremap; then
+    systemctl --user restart xremap
+    exit 0
+fi
+
+# get the xremap process ID
+xremap_pid=$(pgrep -f xremap)
+xremap_arg=$(ps -o args= -p "$xremap_pid")
+
+# if xremap is running, kill it and execute it again
+if [ -n "$xremap_pid" ]; then
+    kill "$xremap_pid"
+    sleep 1
+    $xremap_arg &
+    xremap_pid=$!
+    exit 0
+fi
