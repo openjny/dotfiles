@@ -79,6 +79,7 @@ setopt extended_glob            # use glob to specify filename
 setopt complete_aliases         # 
 setopt hist_expand              # history expansion
 setopt nolistbeep               # no beep sound
+setopt interactivecomments      # comments in interactive mode
 
 # Shift-Tab to move in reverse order
 bindkey "^[[Z" reverse-menu-complete
