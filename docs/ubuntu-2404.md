@@ -15,3 +15,7 @@ done
 gsettings set $SCHEMA repeat-interval 20
 gsettings set $SCHEMA delay 200
 ```
+
+## Gonme Terminal Theme
+
+https://github.com/Gogh-Co/Gogh
