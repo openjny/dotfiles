@@ -1,0 +1,99 @@
+#!/bin/bash
+
+function usage() {
+    command_name=$(basename "$0")
+    echo ""
+    echo "Usage: $command_name [options] command"
+    echo ""
+    echo "Options:"
+    echo "  -h, --help: Show this help message"
+    echo ""
+    echo "Commands:"
+    echo "  update: Update the package manager"
+    echo "  upgrade: Upgrade the installed apps"
+    echo "  list: List upgradable apps"
+    echo "  clean: Clear cache and temporary files"
+    echo ""
+}
+
+function halt() {
+    echo "$1" 1>&2
+    usage
+    exit 1
+}
+
+function section() {
+    echo ""
+    echo "=============================="
+    echo "$1"
+    echo "=============================="
+    echo ""
+}
+
+# parse arguments
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        update)
+            command="update"
+            shift
+            ;;
+        upgrade)
+            command="upgrade"
+            shift
+            ;;
+        list)
+            command="list"
+            shift
+            ;;
+        clean)
+            command="clean"
+            shift
+            ;;
+        *)
+            halt "Unknown command ($1) specified"
+            ;;
+    esac
+done
+
+if [ -z "$command" ]; then
+    halt "No command specified"
+fi
+
+# Package Manager Definitions
+declare -A apt_manager=(
+    ["is_installed"]="command -v apt &> /dev/null"
+    ["update"]="sudo apt update"
+    ["upgrade"]="sudo apt upgrade"
+    ["list"]="sudo apt list --upgradable"
+    ["clean"]="sudo apt clean && sudo apt autoclean && sudo apt autoremove"
+)
+
+declare -A brew_manager=(
+    ["is_installed"]="command -v brew &> /dev/null"
+    ["update"]="brew update"
+    ["upgrade"]="brew upgrade"
+    ["list"]="brew outdated"
+    ["clean"]="brew cleanup"
+)
+
+declare -A manager_list=(
+    ["apt"]="apt_manager"
+    ["brew"]="brew_manager"
+)
+
+# Execute the command for each package manager
+for manager in "${!manager_list[@]}"; do
+    manager_class="${manager_list[$manager]}"
+    is_installed_cmd=$(eval echo "\${$manager_class[is_installed]}")
+    if eval "$is_installed_cmd"; then
+        section " $manager"
+        command_cmd=$(eval echo "\${$manager_class[$command]}")
+        echo "Executing: $command_cmd"
+
+        eval "$command_cmd"
+    fi
+done
