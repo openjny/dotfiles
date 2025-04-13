@@ -46,6 +46,3 @@ zinit light Aloxaf/fzf-tab
 # git fuzzy
 zinit ice as"program" pick"bin/git-fuzzy"
 zinit light bigH/git-fuzzy
-
-# python venv
-zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
