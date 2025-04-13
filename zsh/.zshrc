@@ -48,16 +48,18 @@ setopt promptcr                 # add \n when missing it in the last line
 # -------------------------------------
 
 # initialize autocomplete
-if type brew &>/dev/null; then
-    ZSH_COMPLETIONS="$(brew --prefix)/share/zsh-completions"
-    [ -e $ZSH_COMPLETIONS ] && FPATH="$ZSH_COMPLETIONS:$FPATH"
+# -> Turn off those because those are enabled by zinit
+#
+# if type brew &>/dev/null; then
+#     ZSH_COMPLETIONS="$(brew --prefix)/share/zsh-completions"
+#     [ -e $ZSH_COMPLETIONS ] && FPATH="$ZSH_COMPLETIONS:$FPATH"
 
-    ZSH_AUTOSUGGESTIONS=$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    [ -e $ZSH_AUTOSUGGESTIONS ] && source $ZSH_AUTOSUGGESTIONS
+#     ZSH_AUTOSUGGESTIONS=$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#     [ -e $ZSH_AUTOSUGGESTIONS ] && source $ZSH_AUTOSUGGESTIONS
 
-    ZSH_SYNTAX_HIGHLIGHTING=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    [ -e $ZSH_SYNTAX_HIGHLIGHTING ] && source $ZSH_SYNTAX_HIGHLIGHTING
-fi
+#     ZSH_SYNTAX_HIGHLIGHTING=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#     [ -e $ZSH_SYNTAX_HIGHLIGHTING ] && source $ZSH_SYNTAX_HIGHLIGHTING
+# fi
 
 # enable compinit
 autoload -U compinit add-zsh-hook
