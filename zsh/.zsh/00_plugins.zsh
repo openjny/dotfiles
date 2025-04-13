@@ -33,6 +33,13 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 
+# https://github.com/chitoku-k/fzf-zsh-completions
+zinit light chitoku-k/fzf-zsh-completions
+
+# https://github.com/jeffreytse/zsh-vi-mode
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+
 # use fzf in completion menu
 zinit light Aloxaf/fzf-tab
 
