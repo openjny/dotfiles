@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Dynamic URL Blocker",
+    "version": "1.0",
+    "description": "動的に URL を検査し、条件に基づいてブロックする",
+    "permissions": [
+        "declarativeNetRequest",
+        "storage",
+        "tabs"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "declarative_net_request": {
+        "rule_resources": []
+    }
+}
