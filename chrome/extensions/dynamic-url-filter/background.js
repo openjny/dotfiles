@@ -58,7 +58,7 @@ function generateRulesFromConditions(conditions) {
     if (condition.type === 'regex' && condition.value) {
       dnrCondition = {
         regexFilter: condition.value,
-        resourceTypes: ['main_frame'],
+        resourceTypes: ['main_frame', 'script', 'xmlhttprequest'],
       };
     } else if (condition.type === 'urlFilter' && condition.value) {
       dnrCondition = {
