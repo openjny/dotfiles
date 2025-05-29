@@ -30,4 +30,14 @@ export GIT_EDITOR='nvim'
 # export LANG=ja_JP.UTF-8
 
 # Cargo
-. "$HOME/.cargo/env"
+if command -v cargo &>/dev/null; then
+    CARGO_HOME="$HOME/.cargo"
+    export PATH="$CARGO_HOME/bin:$PATH"
+    source "$CARGO_HOME/env"
+fi
+
+# Golang
+if command -v go &>/dev/null; then
+    GOPATH=$(go env GOPATH)
+    export PATH="$GOPATH/bin:$PATH"
+fi
