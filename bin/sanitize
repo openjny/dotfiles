@@ -1,0 +1,65 @@
+#!/bin/bash
+
+SCRIPT_NAME=$(basename "$0")
+if [ $# -lt 1 ]; then
+    echo "Usage: $SCRIPT_NAME <filename>"
+    echo ""
+    echo "Sanitize the metadata of a file by removing all extended attributes."
+    echo "Supported file types: mp4"
+    exit 1
+fi
+
+ensure_command() {
+    if ! command -v "$1" &> /dev/null; then
+        echo "$1 could not be found, please install it."
+        exit 1
+    fi
+}
+
+swap_input_and_tmp() {
+    # Move the input file to /tmp (remove)
+    input_file="$1"
+    tmp_file="$2"
+
+    input_filename=$(basename "$input_file")
+    mv "$input_file" "/tmp/$input_filename"
+    if [ $? -ne 0 ]; then
+        echo "Failed to move original file to /tmp: $input_file"
+        return 1
+    fi
+    mv "$tmp_file" "$input_file"
+    return $?
+}
+
+sanitize_mp4() {
+    # ffmpeg -i $input -map 0:v -map 0:a -c copy -map_metadata -1 -map_chapters -1 $tmp_file
+    # mv $tmp_file $input
+    ensure_command ffmpeg
+    input_file="$1"
+    tmp_file=$(mktemp --suffix=".mp4" --dry-run)
+    ffmpeg -i "$input_file" -map 0:v -map 0:a -c copy -map_metadata -1 -map_chapters -1 "$tmp_file"
+    if [ $? -ne 0 ] || [ ! -s "$tmp_file" ]; then
+        echo "Failed to sanitize file: $1"
+        rm -f "$tmp_file"
+        exit 1
+    fi
+    swap_input_and_tmp "$input_file" "$tmp_file"
+}
+
+filename="$1"
+if [ ! -f "$filename" ]; then
+    echo "File not found: $filename"
+    exit 1
+fi
+
+file_type=$(file --mime-type -b "$filename")
+case "$file_type" in
+    "video/mp4")
+        sanitize_mp4 "$filename"
+        exit $?
+        ;;
+    *)
+        echo "Unsupported file type: $file_type"
+        exit 1
+        ;;
+esac
