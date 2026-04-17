@@ -23,7 +23,7 @@ if [[ "${REMOTE:-}" == "1" ]]; then
   echo "Mode: REMOTE (testing pushed state from GitHub)"
 else
   MOUNT_ARGS="-v $SCRIPT_DIR:/dotfiles-src:ro"
-  INIT_CMD="chezmoi init --source /dotfiles-src 2>&1"
+  INIT_CMD="mkdir -p ~/.local/share/chezmoi && cp -a /dotfiles-src/. ~/.local/share/chezmoi/ && chezmoi init 2>&1"
   echo "Mode: LOCAL (testing working directory)"
 fi
 
@@ -90,14 +90,17 @@ EOF
   echo "$output"
 
   # Count failures
-  local fails
+  local fails oks
   fails=$(echo "$output" | grep -c "^FAIL" || true)
-  if [[ $fails -gt 0 ]]; then
+  oks=$(echo "$output" | grep -c "^OK" || true)
+  if [[ $oks -eq 0 ]]; then
+    echo "  ❌ No checks ran (init likely failed)"
+    echo "$output" | tail -5
+    return 1
+  elif [[ $fails -gt 0 ]]; then
     echo "  ❌ $fails FAILED"
     return 1
   else
-    local oks
-    oks=$(echo "$output" | grep -c "^OK" || true)
     echo "  ✅ $oks passed"
     return 0
   fi
