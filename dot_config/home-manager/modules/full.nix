@@ -20,6 +20,9 @@
     python3
     go
 
+    # Documents
+    pandoc
+
     # Networking
     nmap
     openssh

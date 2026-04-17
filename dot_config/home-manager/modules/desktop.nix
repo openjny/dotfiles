@@ -9,5 +9,8 @@
     nerd-fonts.meslo-lg
     nerd-fonts.fira-code
     noto-fonts-cjk-sans
+    source-han-code-jp
+    source-code-pro
+    ubuntu-classic
   ];
 }
