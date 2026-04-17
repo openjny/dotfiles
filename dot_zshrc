@@ -3,15 +3,16 @@
 # ------------------------------------
 # Sheldon (plugin manager) — static source for speed
 # ------------------------------------
-# Regenerate lock file: sheldon lock
-sheldon_cache="$XDG_CACHE_HOME/sheldon/source.zsh"
-sheldon_toml="$XDG_CONFIG_HOME/sheldon/plugins.toml"
-if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
-  mkdir -p "${sheldon_cache:h}"
-  sheldon source > "$sheldon_cache"
+if command -v sheldon &>/dev/null; then
+  sheldon_cache="${XDG_CACHE_HOME:-$HOME/.cache}/sheldon/source.zsh"
+  sheldon_toml="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/plugins.toml"
+  if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+    mkdir -p "${sheldon_cache:h}"
+    sheldon source > "$sheldon_cache"
+  fi
+  source "$sheldon_cache"
+  unset sheldon_cache sheldon_toml
 fi
-source "$sheldon_cache"
-unset sheldon_cache sheldon_toml
 
 # ------------------------------------
 # Zsh settings (split files)

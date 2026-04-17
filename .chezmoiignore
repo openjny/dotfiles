@@ -2,6 +2,7 @@ README.md
 LICENSE
 Dockerfile
 test.sh
+install.sh
 
 # desktop only
 {{- if ne .profile "desktop" }}

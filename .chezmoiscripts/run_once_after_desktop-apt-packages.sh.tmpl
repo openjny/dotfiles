@@ -1,7 +1,8 @@
-{{ if eq .profile "desktop" -}}
+{{ if and (eq .profile "desktop") (eq .chezmoi.osRelease.id "ubuntu") -}}
 #!/bin/bash
 # Install desktop-specific apt packages that can't be managed by Nix
 # (kernel integration, daemon services, GPU drivers, etc.)
+# Only runs on Ubuntu (desktop profile)
 #
 # This runs once on first chezmoi apply.
 # To re-run: chezmoi state delete-bucket --bucket=scriptState

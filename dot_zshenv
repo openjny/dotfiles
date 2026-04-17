@@ -23,6 +23,7 @@ fi
 # PATH (deduped by typeset -aU)
 typeset -aU path
 path=(
+  "$HOME/.nix-profile/bin"
   "$HOME/.local/bin"
   "$HOME/bin"
   "$HOME/.cargo/bin"

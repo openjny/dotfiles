@@ -5,7 +5,11 @@ Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/), [Nix (home-ma
 ## Quick Start
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply openjny/dotfiles
+# Full bootstrap (Nix + zsh + chezmoi + home-manager, all in one)
+curl -fsSL https://raw.githubusercontent.com/openjny/dotfiles/main/install.sh | bash
+
+# Or, if you already have Nix + chezmoi:
+chezmoi init --apply openjny/dotfiles --exclude=scripts
 ```
 
 You'll be prompted to choose:
