@@ -6,6 +6,7 @@
     zsh
     tmux
     sheldon
+    neovim
 
     # Search & navigation
     fzf

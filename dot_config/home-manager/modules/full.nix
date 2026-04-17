@@ -16,6 +16,7 @@
 
     # Development
     nodejs
+    pnpm
     python3
     go
 

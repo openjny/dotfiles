@@ -1,7 +1,7 @@
 {{ if eq .profile "desktop" -}}
 #!/bin/bash
 # Enable and start xremap after service file is placed
-# Hash: {{ include "dot_config/systemd/user/xremap.service.tmpl" | sha256sum }}
+# Hash: {{ include "dot_config/systemd/user/xremap.service" | sha256sum }}
 
 set -euo pipefail
 
