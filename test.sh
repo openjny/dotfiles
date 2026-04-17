@@ -1,19 +1,30 @@
 #!/bin/bash
 # Test dotfiles across all profiles using Docker
-# Usage: ./test.sh [profile]    # test single profile
-#        ./test.sh              # test all profiles
+# Usage: ./test.sh [profile]       # test all or single profile
+#        REMOTE=1 ./test.sh        # test from GitHub (pushed state)
+#        REBUILD=1 ./test.sh       # force Docker image rebuild
 
 set -euo pipefail
 
 IMAGE="dotfiles-test"
 REPO="openjny/dotfiles"
-
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Build test image if needed
 if ! docker image inspect "$IMAGE" &>/dev/null || [[ "${REBUILD:-}" == "1" ]]; then
   echo "Building test image..."
-  docker build -t "$IMAGE" .
+  docker build -t "$IMAGE" "$SCRIPT_DIR"
+fi
+
+# Determine init method: local mount or remote clone
+if [[ "${REMOTE:-}" == "1" ]]; then
+  MOUNT_ARGS=""
+  INIT_CMD="chezmoi init $REPO 2>&1"
+  echo "Mode: REMOTE (testing pushed state from GitHub)"
+else
+  MOUNT_ARGS="-v $SCRIPT_DIR:/dotfiles-src:ro"
+  INIT_CMD="chezmoi init --source /dotfiles-src 2>&1"
+  echo "Mode: LOCAL (testing working directory)"
 fi
 
 test_profile() {
@@ -26,7 +37,7 @@ test_profile() {
   echo "=========================================="
 
   local output
-  output=$(docker run --rm "$IMAGE" bash -c "
+  output=$(docker run --rm $MOUNT_ARGS "$IMAGE" bash -c "
     set -e
     mkdir -p ~/.config/chezmoi
     cat > ~/.config/chezmoi/chezmoi.toml <<EOF
@@ -35,7 +46,7 @@ test_profile() {
   email = \"test@example.com\"
   name = \"testuser\"
 EOF
-    chezmoi init $REPO 2>&1
+    $INIT_CMD
     chezmoi apply --no-tty --exclude=scripts 2>&1
     chezmoi verify --exclude=scripts 2>&1
 
