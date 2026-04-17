@@ -1,9 +1,17 @@
 # .zshrc
 
 # ------------------------------------
-# Sheldon (plugin manager)
+# Sheldon (plugin manager) — static source for speed
 # ------------------------------------
-eval "$(sheldon source)"
+# Regenerate lock file: sheldon lock
+sheldon_cache="$XDG_CACHE_HOME/sheldon/source.zsh"
+sheldon_toml="$XDG_CONFIG_HOME/sheldon/plugins.toml"
+if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  mkdir -p "${sheldon_cache:h}"
+  sheldon source > "$sheldon_cache"
+fi
+source "$sheldon_cache"
+unset sheldon_cache sheldon_toml
 
 # ------------------------------------
 # Zsh settings (split files)

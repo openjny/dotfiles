@@ -1,42 +1,46 @@
 # .zshenv — sourced on all invocations of the shell
-# Keep this minimal: only env vars and PATH
+# Keep this FAST and minimal: only env vars, XDG, and PATH
 
 # XDG Base Directory
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # Editor
 export EDITOR='nvim'
+export VISUAL='nvim'
 export GIT_EDITOR='nvim'
 
 # Nix
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
-
-# Home Manager
 if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 fi
 
-# Path
+# PATH (deduped by typeset -aU)
 typeset -aU path
 path=(
   "$HOME/.local/bin"
   "$HOME/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/go/bin"
   $path
 )
 
-# Cargo
-if [ -d "$HOME/.cargo/bin" ]; then
-  path=("$HOME/.cargo/bin" $path)
-fi
-
-# Go
-if command -v go &>/dev/null; then
-  path=("$(go env GOPATH)/bin" $path)
-fi
+# Pager / man colors
+export PAGER='less'
+export LESS='-R --mouse'
+export MANROFFOPT='-c'
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;36m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[1;44;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;35m'
 
 # Local overrides
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

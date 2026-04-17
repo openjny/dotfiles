@@ -21,22 +21,29 @@ else
   alias lla='ls -lAFh'
 fi
 
-# Use nvim
+# Editor
 [[ -n "$(command -v nvim)" ]] && alias vim="nvim"
 
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias -- -='cd -'
 
 # Helpers
 alias grep='grep --color=auto'
+alias diff='diff --color=auto'
 alias df='df -h'
 alias du='du -h -c'
+alias mkdir='mkdir -pv'
+alias cp='cp -iv'
+alias mv='mv -iv'
 
 # Git shortcuts
 alias gs='git status -sb'
 alias glog='git log --oneline --graph --decorate -20'
+alias gd='git diff'
+alias gds='git diff --staged'
 
 # tmux
 alias ta='tmux attach'
@@ -44,11 +51,6 @@ alias tls='tmux ls'
 alias tat='tmux attach -t'
 alias tns='tmux new-session -s'
 
-# PATH display
+# Utility
 alias lpath='echo $PATH | tr ":" "\n"'
-
-# man page colors
-export MANROFFOPT='-c'
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
-export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
-export LESS_TERMCAP_me=$(tput sgr0)
+alias ip='ip -color=auto'
