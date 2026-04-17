@@ -1,0 +1,18 @@
+# .zshrc
+
+# ------------------------------------
+# Sheldon (plugin manager)
+# ------------------------------------
+eval "$(sheldon source)"
+
+# ------------------------------------
+# Zsh settings (split files)
+# ------------------------------------
+for zsh_file in "$HOME/.zsh"/*.zsh(N); do
+  source "$zsh_file"
+done
+
+# ------------------------------------
+# Local overrides
+# ------------------------------------
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

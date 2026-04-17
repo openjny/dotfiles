@@ -1,0 +1,47 @@
+# Starship prompt configuration
+# https://starship.rs/config/
+
+# Reduce prompt delay
+command_timeout = 500
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[directory]
+truncation_length = 5
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+
+[azure]
+disabled = false
+format = "[$symbol($subscription)]($style) "
+
+[kubernetes]
+disabled = false
+format = "[$symbol$context( \\($namespace\\))]($style) "
+
+[python]
+format = "[$symbol$pyenv_prefix($version )(\\($virtualenv\\) )]($style)"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[golang]
+format = "[$symbol($version )]($style)"
+
+[terraform]
+format = "[$symbol$workspace]($style) "
+
+[cmd_duration]
+min_time = 5000
+format = "[$duration]($style) "
+
+[time]
+disabled = true

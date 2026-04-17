@@ -1,0 +1,36 @@
+[user]
+  name = {{ .name | quote }}
+  email = {{ .email | quote }}
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = false
+
+[core]
+  editor = nvim
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  side-by-side = true
+  line-numbers = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[alias]
+  s = status -sb
+  l = log --oneline --graph --decorate -20
+  co = checkout
+  br = branch
+  ci = commit
+  d = diff
+  ds = diff --staged

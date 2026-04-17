@@ -1,0 +1,8 @@
+{{- $profile := promptChoiceOnce . "profile" "Environment profile" (list "minimal" "full" "desktop") -}}
+{{- $email := promptStringOnce . "email" "Git email address" -}}
+{{- $name := promptStringOnce . "name" "Git user name" -}}
+
+[data]
+  profile = {{ $profile | quote }}
+  email = {{ $email | quote }}
+  name = {{ $name | quote }}

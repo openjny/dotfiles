@@ -1,0 +1,33 @@
+# xremap config — migrated from v1-legacy
+# CapsLock → Super_R (tap: Esc, hold: modifier)
+
+modmap:
+  - name: Global
+    remap:
+      CapsLock:
+        Super_R
+
+keymap:
+  - name: Ctrl + [
+    remap:
+      Super_R:
+        remap:
+          Super_R: KEY_ESC
+        timeout_millis: 150
+
+      Super_R-h: Left
+      Super_R-j: Down
+      Super_R-k: Up
+      Super_R-l: Right
+      Super_R-o: Backspace
+      Super_R-BackSpace: Delete
+
+      # CapsLock + Space = IME Switcher
+      Super_R-Space: Hiragana
+
+      # Disable pre-defined commands on Super
+      Super_R-p: p
+
+      # Ctrl [ = Turn off IME + Esc
+      Super_R-KEY_LEFTBRACE: [Muhenkan, Esc]
+      CTRL-KEY_LEFTBRACE: [Muhenkan, Esc]

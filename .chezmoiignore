@@ -1,0 +1,18 @@
+README.md
+LICENSE
+
+# desktop only
+{{- if ne .profile "desktop" }}
+private_dot_config/xremap
+{{- end }}
+
+# full + desktop only
+{{- if eq .profile "minimal" }}
+dot_config/home-manager/modules/full.nix
+dot_config/home-manager/modules/desktop.nix
+{{- end }}
+
+# desktop only modules
+{{- if ne .profile "desktop" }}
+dot_config/home-manager/modules/desktop.nix
+{{- end }}
