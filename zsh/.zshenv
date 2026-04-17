@@ -41,3 +41,5 @@ if command -v go &>/dev/null; then
     GOPATH=$(go env GOPATH)
     export PATH="$GOPATH/bin:$PATH"
 fi
+
+. "$HOME/.local/bin/env"
