@@ -1,0 +1,19 @@
+{ config, pkgs, ... }:
+
+{
+  home.username = "{{ .chezmoi.username }}";
+  home.homeDirectory = "{{ .chezmoi.homeDir }}";
+  home.stateVersion = "24.05";
+
+  programs.home-manager.enable = true;
+
+  imports = [
+    ./modules/core.nix
+{{- if or (eq .profile "full") (eq .profile "desktop") }}
+    ./modules/full.nix
+{{- end }}
+{{- if eq .profile "desktop" }}
+    ./modules/desktop.nix
+{{- end }}
+  ];
+}

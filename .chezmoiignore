@@ -1,18 +1,19 @@
 README.md
 LICENSE
+Dockerfile
 
 # desktop only
 {{- if ne .profile "desktop" }}
 .config/xremap
 {{- end }}
 
-# full + desktop only
+# minimal: exclude full + desktop modules
 {{- if eq .profile "minimal" }}
-dot_config/home-manager/modules/full.nix
-dot_config/home-manager/modules/desktop.nix
+.config/home-manager/modules/full.nix
+.config/home-manager/modules/desktop.nix
 {{- end }}
 
-# desktop only modules
+# non-desktop: exclude desktop module
 {{- if ne .profile "desktop" }}
-dot_config/home-manager/modules/desktop.nix
+.config/home-manager/modules/desktop.nix
 {{- end }}
