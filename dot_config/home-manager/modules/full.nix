@@ -7,12 +7,12 @@
 
     # Azure
     azure-cli
-    azd
+    # azd: install via `curl -fsSL https://aka.ms/install-azd.sh | bash`
 
     # Cloud & container tools
     kubectl
-    kubernetes-helm
-    terraform
+    helm
+    opentofu  # terraform-compatible, open-source
 
     # Development
     nodejs
