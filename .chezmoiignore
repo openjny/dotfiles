@@ -5,6 +5,7 @@ Dockerfile
 # desktop only
 {{- if ne .profile "desktop" }}
 .config/xremap
+.config/systemd/user/xremap.service
 {{- end }}
 
 # minimal: exclude full + desktop modules
