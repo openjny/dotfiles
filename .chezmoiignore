@@ -3,7 +3,7 @@ LICENSE
 
 # desktop only
 {{- if ne .profile "desktop" }}
-private_dot_config/xremap
+.config/xremap
 {{- end }}
 
 # full + desktop only
