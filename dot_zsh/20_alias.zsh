@@ -4,6 +4,16 @@
 # Initial theme set by starship-theme or default to catppuccin-mocha
 if command -v vivid &>/dev/null; then
   export LS_COLORS="$(vivid generate "${THEME_VIVID:-catppuccin-mocha}")"
+  # Make eza use LS_COLORS + Catppuccin Mocha UI colors
+  export EZA_COLORS="reset:\
+ur=38;2;203;166;247:uw=38;2;243;139;168:ux=38;2;166;227;161:\
+gr=38;2;203;166;247:gw=38;2;243;139;168:gx=38;2;166;227;161:\
+tr=38;2;203;166;247:tw=38;2;243;139;168:tx=38;2;166;227;161:\
+sn=38;2;166;227;161:sb=38;2;148;226;213:\
+uu=38;2;205;214;244:un=38;2;88;91;112:\
+gu=38;2;205;214;244:gn=38;2;88;91;112:\
+da=38;2;137;180;250:\
+xx=38;2;88;91;112"
 fi
 
 # Reload zsh config
@@ -75,6 +85,11 @@ starship-theme() {
   fi
   echo "Switched to: $1 (starship + LS_COLORS)"
 }
+_starship-theme() {
+  local themes_dir="${XDG_CONFIG_HOME:-$HOME/.config}/starship/themes"
+  compadd -- ${${(f)"$(ls "$themes_dir"/*.toml 2>/dev/null)"}:t:r}
+}
+compdef _starship-theme starship-theme
 
 # Helpers
 alias grep='grep --color=auto'

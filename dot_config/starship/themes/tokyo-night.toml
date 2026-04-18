@@ -7,7 +7,7 @@
 command_timeout = 500
 
 format = """
-[\uE0B6](fg:#F7768E)$directory[\uE0B0](fg:#F7768E bg:#FF9E64)$git_branch$git_status[\uE0B0](fg:#FF9E64 bg:#7DCFFF)$python$nodejs$golang$rust$java$terraform[\uE0B0](fg:#7DCFFF bg:#9ECE6A)$azure$kubernetes$docker_context[\uE0B0](fg:#9ECE6A)$fill$cmd_duration$line_break$character"""
+$directory[\uE0B0](fg:#F7768E bg:#FF9E64)$git_branch$git_status[\uE0B0](fg:#FF9E64 bg:#7DCFFF)$python$nodejs$golang$rust$java$terraform[\uE0B0](fg:#7DCFFF bg:#9ECE6A)$azure$kubernetes$docker_context[\uE0B0](fg:#9ECE6A)$fill$cmd_duration$line_break$character"""
 
 right_format = ""
 

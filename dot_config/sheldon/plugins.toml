@@ -41,6 +41,16 @@ github = "zsh-users/zsh-history-substring-search"
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
 
+[plugins.fsh-catppuccin]
+inline = '''
+# Apply Catppuccin Mocha theme for fast-syntax-highlighting
+local fsh_theme_dir="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/repos/github.com/zdharma-continuum/fast-syntax-highlighting/themes"
+if [[ -d "$fsh_theme_dir" ]] && [[ ! -f "$fsh_theme_dir/catppuccin-mocha.ini" ]]; then
+  curl -fsSL "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-mocha.ini" -o "$fsh_theme_dir/catppuccin-mocha.ini" 2>/dev/null
+fi
+[[ "$(fast-theme -s 2>/dev/null)" != *catppuccin-mocha* ]] && fast-theme catppuccin-mocha >/dev/null 2>&1
+'''
+
 [plugins.zoxide]
 inline = 'eval "$(zoxide init zsh)"'
 
