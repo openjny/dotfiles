@@ -1,18 +1,5 @@
 # 10_completion.zsh — Completion settings
-
-# Cached compinit: only regenerate dump once per day
-autoload -Uz compinit
-_comp_dump="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
-[[ -d "${_comp_dump:h}" ]] || mkdir -p "${_comp_dump:h}"
-if [[ -n "$_comp_dump"(#qN.mh+24) ]]; then
-  compinit -d "$_comp_dump"
-else
-  compinit -C -d "$_comp_dump"
-fi
-unset _comp_dump
-
-# Load bash completions (needed for az cli, etc.)
-autoload -Uz bashcompinit && bashcompinit
+# Note: compinit is handled by sheldon (before fzf-tab)
 
 # Options
 setopt complete_in_word       # complete from cursor position, not end
@@ -38,6 +25,8 @@ zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range=:50 $realpath 2>/dev/null || eza -la $realpath 2>/dev/null'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --level=2 $realpath 2>/dev/null'
 zstyle ':fzf-tab:' use-fzf-default-opts yes
+# Strip zsh prompt escapes in group headers (fixes raw %F{yellow} in fzf)
+zstyle ':fzf-tab:*' show-group brief
 
 # Case-insensitive, partial-word, and substring matching
 zstyle ':completion:*' matcher-list \
@@ -50,8 +39,8 @@ zstyle ':completion:*' special-dirs true
 # Pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
-# Completer chain
-zstyle ':completion:*' completer _expand _complete _files _correct _approximate
+# Completer chain (no _files — prevents fallback to file listing for typed commands)
+zstyle ':completion:*' completer _expand _complete _correct _approximate
 
 # Use LS_COLORS for colorized completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -61,10 +50,11 @@ zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compcache"
 
 # Description formatting
-zstyle ':completion:*:descriptions' format '%F{yellow}completing %B%d%b%f'
-zstyle ':completion:*:corrections' format '%F{green}!- %d (errors: %e) -!%f'
-zstyle ':completion:*:warnings' format '%F{red}No matches for: %F{yellow}%d%f'
-zstyle ':completion:*:messages' format '%F{yellow}%d%f'
+# Use plain text for fzf-tab compatibility (fzf-tab handles coloring via group-colors)
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:corrections' format '!- %d (errors: %e) -!'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:options' description yes
 zstyle ':completion:*:manuals' separate-sections true
 
