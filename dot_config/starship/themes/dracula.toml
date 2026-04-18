@@ -7,7 +7,7 @@
 command_timeout = 500
 
 format = """
-[\uE0B6](fg:#F38BA8)$directory[\uE0B0](fg:#F38BA8 bg:#FAB387)$git_branch$git_status[\uE0B0](fg:#FAB387 bg:#89B4FA)$python$nodejs$golang$rust$java$terraform[\uE0B0](fg:#89B4FA bg:#94E2D5)$azure$kubernetes$docker_context[\uE0B0](fg:#94E2D5)$fill$cmd_duration$line_break$character"""
+[\uE0B6](fg:#FF5555)$directory[\uE0B0](fg:#FF5555 bg:#FFB86C)$git_branch$git_status[\uE0B0](fg:#FFB86C bg:#8BE9FD)$python$nodejs$golang$rust$java$terraform[\uE0B0](fg:#8BE9FD bg:#50FA7B)$azure$kubernetes$docker_context[\uE0B0](fg:#50FA7B)$fill$cmd_duration$line_break$character"""
 
 right_format = ""
 
@@ -16,21 +16,21 @@ symbol = " "
 
 [username]
 show_always = false
-style_user = "bg:#CBA6F7 fg:#11111B"
-style_root = "bg:#CBA6F7 fg:#11111B"
+style_user = "bg:#BD93F9 fg:#282A36"
+style_root = "bg:#BD93F9 fg:#282A36"
 format = '[$user ]($style)'
 
 [os]
-style = "bg:#CBA6F7 fg:#11111B"
+style = "bg:#BD93F9 fg:#282A36"
 disabled = true
 
 [character]
-success_symbol = "[  \u276F](bold #CBA6F7)"
-error_symbol = "[ ✘ \u276F](italic #F38BA8)"
-vimcmd_symbol = "[\u276E](bold #FAB387)"
+success_symbol = "[  \u276F](bold #BD93F9)"
+error_symbol = "[ ✘ \u276F](italic #FF5555)"
+vimcmd_symbol = "[\u276E](bold #FFB86C)"
 
 [directory]
-style = "bg:#F38BA8 fg:#11111B"
+style = "bg:#FF5555 fg:#282A36"
 format = "[ $path ]($style)"
 truncation_length = 2
 truncation_symbol = "\u2026/"
@@ -41,11 +41,11 @@ truncate_to_repo = false
 
 [git_branch]
 symbol = "\uE0A0"
-style = "bg:#FAB387 fg:#11111B"
+style = "bg:#FFB86C fg:#282A36"
 format = '[ $symbol $branch(:$remote_branch) ]($style)'
 
 [git_status]
-style = "bg:#FAB387 fg:#11111B"
+style = "bg:#FFB86C fg:#282A36"
 format = '([$all_status$ahead_behind ]($style))'
 ahead = "\uF0AA $count"
 behind = "\uF0AB $count"
@@ -60,46 +60,46 @@ deleted = "\uFAE7 $count"
 
 [python]
 symbol = " "
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol($version )(\($virtualenv\) )]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol ($version) ]($style)'
 
 [golang]
 symbol = " "
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
 symbol = " "
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol ($version) ]($style)'
 
 [terraform]
-style = "bg:#89B4FA fg:#11111B"
+style = "bg:#8BE9FD fg:#282A36"
 format = '[ $symbol$workspace ]($style)'
 
 [azure]
 disabled = false
-style = "bg:#94E2D5 fg:#11111B"
+style = "bg:#50FA7B fg:#282A36"
 format = '[ $symbol]($style)'
 
 [kubernetes]
 disabled = false
-style = "bg:#94E2D5 fg:#11111B"
+style = "bg:#50FA7B fg:#282A36"
 format = '[ $symbol$context(\($namespace\)) ]($style)'
 
 [docker_context]
 symbol = " "
-style = "bg:#94E2D5 fg:#11111B"
+style = "bg:#50FA7B fg:#282A36"
 format = '[ $symbol$context ]($style)'
 
 [cmd_duration]

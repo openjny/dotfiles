@@ -1,5 +1,10 @@
 # 20_alias.zsh — Aliases
 
+# LS_COLORS via vivid (truecolor, theme-consistent across environments)
+if command -v vivid &>/dev/null; then
+  export LS_COLORS="$(vivid generate catppuccin-mocha)"
+fi
+
 # Reload zsh config
 alias reload!='exec zsh'
 
@@ -35,6 +40,24 @@ if command -v bat &>/dev/null; then
   alias cat='bat --paging=never'
   alias catp='bat'
 fi
+
+# Starship theme switcher
+starship-theme() {
+  local themes_dir="${XDG_CONFIG_HOME:-$HOME/.config}/starship/themes"
+  if [[ -z "$1" ]]; then
+    echo "Available themes:"
+    ls "$themes_dir"/*.toml 2>/dev/null | xargs -I{} basename {} .toml
+    echo "\nUsage: starship-theme <name>"
+    return
+  fi
+  local theme="$themes_dir/$1.toml"
+  if [[ ! -f "$theme" ]]; then
+    echo "Theme not found: $1"
+    return 1
+  fi
+  cp "$theme" "${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"
+  echo "Switched to: $1"
+}
 
 # Helpers
 alias grep='grep --color=auto'
