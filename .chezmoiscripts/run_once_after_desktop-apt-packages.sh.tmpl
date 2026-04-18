@@ -9,38 +9,46 @@
 
 set -euo pipefail
 
-packages=(
-  # Container runtime (needs systemd + kernel)
-  docker-ce
-  docker-ce-cli
-  containerd.io
-  docker-buildx-plugin
-  docker-compose-plugin
+packages=()
 
-  # Input method
-  fcitx5-mozc
+# Docker: only install if not already present
+if ! command -v docker &>/dev/null; then
+  packages+=(
+    docker-ce
+    docker-ce-cli
+    containerd.io
+    docker-buildx-plugin
+    docker-compose-plugin
+  )
 
-  # Clipboard (Wayland)
-  wl-clipboard
-  wtype
-  xdotool
-)
-
-# Check if Docker repo is configured
-if ! apt-cache policy docker-ce 2>/dev/null | grep -q docker.com; then
-  echo "Adding Docker repository..."
-  sudo install -m 0755 -d /etc/apt/keyrings
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-  sudo chmod a+r /etc/apt/keyrings/docker.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt-get update
+  # Add Docker apt repo if needed
+  if ! apt-cache policy docker-ce 2>/dev/null | grep -q docker.com; then
+    echo "Adding Docker repository..."
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+  fi
 fi
 
-echo "Installing desktop apt packages..."
+# Other desktop packages: only add if not already installed
+for pkg in fcitx5-mozc wl-clipboard wtype xdotool; do
+  if ! dpkg -s "$pkg" &>/dev/null; then
+    packages+=("$pkg")
+  fi
+done
+
+if [[ ${#packages[@]} -eq 0 ]]; then
+  echo "All desktop apt packages already installed, skipping"
+  exit 0
+fi
+
+echo "Installing desktop apt packages: ${packages[*]}"
 sudo apt-get install -y "${packages[@]}"
 
 # Add user to docker group if not already
-if ! groups | grep -q docker; then
+if command -v docker &>/dev/null && ! groups | grep -q docker; then
   sudo usermod -aG docker "$USER"
   echo "Added $USER to docker group (re-login required)"
 fi

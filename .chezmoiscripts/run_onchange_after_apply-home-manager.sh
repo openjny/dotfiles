@@ -14,5 +14,5 @@ if ! command -v home-manager &>/dev/null; then
 fi
 
 echo "Applying home-manager configuration..."
-home-manager switch --flake ~/.config/home-manager
+home-manager switch --flake ~/.config/home-manager#default
 echo "home-manager applied successfully"

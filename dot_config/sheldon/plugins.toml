@@ -15,3 +15,6 @@ github = "Aloxaf/fzf-tab"
 
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
+
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
