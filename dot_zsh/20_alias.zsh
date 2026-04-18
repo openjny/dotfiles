@@ -1,8 +1,9 @@
 # 20_alias.zsh — Aliases
 
 # LS_COLORS via vivid (truecolor, theme-consistent across environments)
+# Initial theme set by starship-theme or default to catppuccin-mocha
 if command -v vivid &>/dev/null; then
-  export LS_COLORS="$(vivid generate catppuccin-mocha)"
+  export LS_COLORS="$(vivid generate "${THEME_VIVID:-catppuccin-mocha}")"
 fi
 
 # Reload zsh config
@@ -41,9 +42,19 @@ if command -v bat &>/dev/null; then
   alias catp='bat'
 fi
 
-# Starship theme switcher
+# Starship + vivid theme switcher
 starship-theme() {
   local themes_dir="${XDG_CONFIG_HOME:-$HOME/.config}/starship/themes"
+  # Map starship theme name -> vivid theme name
+  local -A vivid_map=(
+    [catppuccin-mocha]=catppuccin-mocha
+    [gruvbox-dark]=gruvbox-dark
+    [tokyo-night]=tokyonight-night
+    [dracula]=dracula
+    [nord]=nord
+    [rose-pine]=rose-pine
+    [one-dark]=one-dark
+  )
   if [[ -z "$1" ]]; then
     echo "Available themes:"
     ls "$themes_dir"/*.toml 2>/dev/null | xargs -I{} basename {} .toml
@@ -56,7 +67,13 @@ starship-theme() {
     return 1
   fi
   cp "$theme" "${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"
-  echo "Switched to: $1"
+  # Switch vivid LS_COLORS if available
+  local vt="${vivid_map[$1]}"
+  if [[ -n "$vt" ]] && command -v vivid &>/dev/null; then
+    export THEME_VIVID="$vt"
+    export LS_COLORS="$(vivid generate "$vt")"
+  fi
+  echo "Switched to: $1 (starship + LS_COLORS)"
 }
 
 # Helpers
