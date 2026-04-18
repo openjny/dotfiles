@@ -35,13 +35,13 @@
   # Starship prompt
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;  # init via sheldon (chezmoi manages .zshrc)
   };
 
   # fzf integration
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;  # init via sheldon
     defaultCommand = "rg --files --hidden --follow --glob '!.git/*'";
     changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
     fileWidgetCommand = "rg --files --hidden --follow --glob '!.git/*'";
@@ -51,7 +51,7 @@
   # zoxide (z replacement)
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;  # init via sheldon
   };
 
   # bat (cat replacement)
@@ -61,5 +61,12 @@
       theme = "TwoDark";
       style = "header,grid";
     };
+  };
+
+  # direnv (per-directory env)
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = false;  # init via sheldon
+    nix-direnv.enable = true;
   };
 }

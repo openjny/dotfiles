@@ -85,6 +85,13 @@ EOF
 
     # Syntax check
     zsh -n ~/.zshrc 2>&1 && echo 'OK zshrc syntax' || echo 'FAIL zshrc syntax'
+
+    # Sheldon check: plugins.toml is valid and generated source can be parsed by zsh
+    sheldon --config-file ~/.config/sheldon/plugins.toml source > /tmp/sheldon-test.zsh 2>&1 && echo 'OK sheldon source' || echo 'FAIL sheldon source'
+    if [ -f /tmp/sheldon-test.zsh ]; then
+      zsh -n /tmp/sheldon-test.zsh 2>&1 && echo 'OK sheldon zsh syntax' || echo 'FAIL sheldon zsh syntax'
+      rm -f /tmp/sheldon-test.zsh
+    fi
   " 2>&1)
 
   echo "$output"

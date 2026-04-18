@@ -16,5 +16,15 @@ github = "Aloxaf/fzf-tab"
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 
+# Tool init (installed via home-manager, init via sheldon since chezmoi manages .zshrc)
+[plugins.fzf]
+inline = 'eval "$(fzf --zsh)"'
+
+[plugins.zoxide]
+inline = 'eval "$(zoxide init zsh)"'
+
+[plugins.direnv]
+inline = 'eval "$(direnv hook zsh)"'
+
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'

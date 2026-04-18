@@ -34,6 +34,11 @@ bindkey "^[[Z" reverse-menu-complete
 # Menu selection with highlighting
 zstyle ':completion:*:*:*:*:*' menu select
 
+# fzf-tab preview
+zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range=:50 $realpath 2>/dev/null || eza -la $realpath 2>/dev/null'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --level=2 $realpath 2>/dev/null'
+zstyle ':fzf-tab:' use-fzf-default-opts yes
+
 # Case-insensitive, partial-word, and substring matching
 zstyle ':completion:*' matcher-list \
   'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' \

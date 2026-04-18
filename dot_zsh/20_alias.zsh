@@ -30,6 +30,12 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias -- -='cd -'
 
+# bat (cat replacement)
+if command -v bat &>/dev/null; then
+  alias cat='bat --paging=never'
+  alias catp='bat'
+fi
+
 # Helpers
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
