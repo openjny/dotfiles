@@ -26,7 +26,12 @@ autoload -Uz bashcompinit && bashcompinit
 # Tool init (installed via home-manager, init via sheldon since chezmoi manages .zshrc)
 # fzf must load BEFORE fzf-tab so fzf-tab can override the TAB binding
 [plugins.fzf]
-inline = 'eval "$(fzf --zsh)"'
+inline = '''
+eval "$(fzf --zsh)"
+# Re-apply FZF colors from hm-session-vars (fzf --zsh clears FZF_DEFAULT_OPTS)
+[[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && \
+  eval "$(grep '^export FZF_' "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh")"
+'''
 
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"

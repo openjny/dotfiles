@@ -47,16 +47,16 @@ format = '[ $symbol $branch(:$remote_branch) ]($style)'
 [git_status]
 style = "bg:#FFB86C fg:#282A36"
 format = '([$all_status$ahead_behind ]($style))'
-ahead = "\uF0AA $count"
-behind = "\uF0AB $count"
-diverged = "\uF5FA $count"
-conflicted = "\uF06A $count"
-untracked = "\uF059 $count"
-stashed = "\uF692 $count"
-modified = "\uF071 $count"
-staged = "\uF067 $count"
-renamed = "\uF45A $count"
-deleted = "\uFAE7 $count"
+ahead = '[$count]'
+behind = '[$count]'
+diverged = '[$count]'
+conflicted = '[$count]'
+untracked = '[$count]'
+stashed = '[$count]'
+modified = '[$count]'
+staged = '[$count]'
+renamed = '[$count]'
+deleted = '[$count]'
 
 [python]
 symbol = " "

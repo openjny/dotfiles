@@ -46,40 +46,41 @@ format = '[ $symbol $branch(:$remote_branch) ]($style)'
 
 [git_status]
 style = "bg:#FAB387 fg:#11111B"
-format = '([$all_status$ahead_behind ]($style))'
-ahead = "\uF0AA $count"
-behind = "\uF0AB $count"
-diverged = "\uF5FA $count"
-conflicted = "\uF06A $count"
-untracked = "\uF059 $count"
-stashed = "\uF692 $count"
-modified = "\uF071 $count"
-staged = "\uF067 $count"
-renamed = "\uF45A $count"
-deleted = "\uFAE7 $count"
+format = '([$all_status$ahead_behind]($style))'
+ahead = "\uF062 "
+behind = "\uF063 "
+diverged = "\uF0EC "
+conflicted = "\uF06A "
+untracked = "\uF128 "
+stashed = "\uF187 "
+modified = "\uF040 "
+staged = "\uF067 "
+renamed = "\uF0EC "
+deleted = "\uF014 "
 
 [python]
-symbol = " "
+symbol = "\uE235 "
+version_format = "v${major}.${minor}"
 style = "bg:#89B4FA fg:#11111B"
 format = '[ $symbol($version )(\($virtualenv\) )]($style)'
 
 [nodejs]
-symbol = ""
+symbol = "\uE718 "
 style = "bg:#89B4FA fg:#11111B"
 format = '[ $symbol ($version) ]($style)'
 
 [golang]
-symbol = " "
+symbol = "\uE626 "
 style = "bg:#89B4FA fg:#11111B"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
-symbol = ""
+symbol = "\uE7A8 "
 style = "bg:#89B4FA fg:#11111B"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
-symbol = " "
+symbol = "\uE738 "
 style = "bg:#89B4FA fg:#11111B"
 format = '[ $symbol ($version) ]($style)'
 
@@ -98,7 +99,7 @@ style = "bg:#94E2D5 fg:#11111B"
 format = '[ $symbol$context(\($namespace\)) ]($style)'
 
 [docker_context]
-symbol = " "
+symbol = "\uF308 "
 style = "bg:#94E2D5 fg:#11111B"
 format = '[ $symbol$context ]($style)'
 

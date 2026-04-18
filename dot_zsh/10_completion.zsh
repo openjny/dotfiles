@@ -25,6 +25,12 @@ zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range=:50 $realpath 2>/dev/null || eza -la $realpath 2>/dev/null'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --level=2 $realpath 2>/dev/null'
 zstyle ':fzf-tab:' use-fzf-default-opts yes
+# Catppuccin Mocha colors for fzf-tab
+zstyle ':fzf-tab:*' fzf-flags \
+  '--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8' \
+  '--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc' \
+  '--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8' \
+  '--color=selected-bg:#45475a'
 # Strip zsh prompt escapes in group headers (fixes raw %F{yellow} in fzf)
 zstyle ':fzf-tab:*' show-group brief
 
