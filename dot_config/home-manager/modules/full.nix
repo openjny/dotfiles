@@ -17,6 +17,7 @@
     # Development
     nodejs
     pnpm
+    bun
     python3
     go
 

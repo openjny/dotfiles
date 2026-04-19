@@ -12,6 +12,9 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export GIT_EDITOR='nvim'
 
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+
 # Nix
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -26,6 +29,7 @@ path=(
   "$HOME/.nix-profile/bin"
   "$HOME/.local/bin"
   "$HOME/bin"
+  "$HOME/.bun/bin"
   "$HOME/.cargo/bin"
   "$HOME/go/bin"
   $path
