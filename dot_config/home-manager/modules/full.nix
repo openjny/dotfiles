@@ -15,11 +15,16 @@
     opentofu  # terraform-compatible, open-source
 
     # Development
+    prek
+    shellcheck
+
+    # Programming languages & runtimes
     nodejs
     pnpm
     bun
     python3
     go
+    cargo
 
     # Documents
     pandoc
